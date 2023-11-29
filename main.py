@@ -51,7 +51,6 @@ def main():
 
     # Begin runtime for the application window
     app.mainloop()
-    print("test")
     return
 
 main()
