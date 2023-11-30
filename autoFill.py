@@ -19,9 +19,3 @@ class autoFill:
             return -1, -1
         print("success")
         return client_id, client_secret
-    
-    def getClientId():
-        return client_id
-    
-    def getClientSecret():
-        return client_secret
