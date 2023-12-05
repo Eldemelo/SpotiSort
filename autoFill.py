@@ -4,7 +4,6 @@ class autoFill:
         return
 
     def getFromFile():
-        print("testing")
         # Attempts to open file saved from previous session
         try:
             authFile = open("login.txt", "r")
@@ -17,5 +16,4 @@ class autoFill:
             authFile.close()
         except IOError:
             return -1, -1
-        print("success")
         return client_id, client_secret

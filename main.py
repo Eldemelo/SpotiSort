@@ -16,6 +16,7 @@ def welcomePage():
 def autofillCreds():
     getTokenFile = autoFill.autoFill
     client_id, client_secret = getTokenFile.getFromFile()
+    print("success", client_id, client_secret)
     return client_id, client_secret
 
 # Opens login window for user to enter credentials
@@ -24,6 +25,16 @@ def loginPage():
     getUserToken = getCred.getCred
     welcome.pack_forget()
     login.pack(padx=3, pady=5, fill="both", expand=True)
+    
+    idLabel = tk.CTkLabel(master=login, text="Enter Client ID")
+    idLabel.place(relx=0.5, rely=0.35, anchor="center")
+    idEntry = tk.CTkEntry(master=login, show="*****")
+    idEntry.place(relx=0.5, rely=0.4, anchor="center")
+    secretLabel = tk.CTkLabel(master=login, text="Enter Client Secret")
+    secretLabel.place(relx=0.5, rely=0.45, anchor="center")
+    secretEntry = tk.CTkEntry(master=login, show="*****")
+    secretEntry.place(relx=0.5, rely=0.5, anchor="center")
+
     return
 
 # Function to declare the pages being used during application use
