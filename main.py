@@ -25,16 +25,27 @@ def loginPage():
     getUserToken = getCred.getCred
     welcome.pack_forget()
     login.pack(padx=3, pady=5, fill="both", expand=True)
+    login.grid_columnconfigure(0, weight=1)
     
-    idLabel = tk.CTkLabel(master=login, text="Enter Client ID")
-    idLabel.place(relx=0.5, rely=0.35, anchor="center")
-    idEntry = tk.CTkEntry(master=login, show="*****")
-    idEntry.place(relx=0.5, rely=0.4, anchor="center")
-    secretLabel = tk.CTkLabel(master=login, text="Enter Client Secret")
-    secretLabel.place(relx=0.5, rely=0.45, anchor="center")
-    secretEntry = tk.CTkEntry(master=login, show="*****")
-    secretEntry.place(relx=0.5, rely=0.5, anchor="center")
+    # Copy code but with column spacing
+    idLabel = tk.CTkLabel(master=login, text="Client ID:")
+    idLabel.grid(row=0, column=0, padx=5, pady=10)
+    '''
+    idLabel = tk.CTkLabel(master=login, text="Client ID:")
+    idLabel.place(relx=0.4, rely=0.35, anchor="center")
+    userId = ""
+    idEntry = tk.CTkEntry(master=login, textvariable=userId)
+    idEntry.place(relx=0.5, rely=0.35, anchor="center")
+    secretLabel = tk.CTkLabel(master=login, text="Client Secret:")
+    secretLabel.place(relx=0.4, rely=0.4, anchor="center")
+    userSecret = ""
+    secretEntry = tk.CTkEntry(master=login, show="*****", textvariable=userSecret)
+    secretEntry.place(relx=0.5, rely=0.4, anchor="center")
+    '''
 
+    # Attempt to get token from entered values
+    loginButton = tk.CTkButton(master=login, text="Login", command=declarePages)
+    loginButton.place(relx=0.5, rely=0.5, anchor="center")
     return
 
 # Function to declare the pages being used during application use
@@ -53,6 +64,7 @@ def main():
     app.title("SpotiSort")
     tk.set_appearance_mode("dark")
     tk.set_default_color_theme("green")
+    app.grid_columnconfigure(0, weight=1)
 
     # Run function to declare all pages
     declarePages()
