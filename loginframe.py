@@ -1,4 +1,6 @@
 import customtkinter
+import getCred
+
 class LoginFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
@@ -22,5 +24,13 @@ class LoginFrame(customtkinter.CTkFrame):
 
         return
     
-    def processCreds():
-        pass
+    def processCreds(self):
+        access_token = ""
+        token_type = ""
+        try:
+            access_token, token_type = getCred.getCred.retrieveToken(
+                self.idEntry.get(),
+                self.secretEntry.get())
+        except:
+            print("Invalid Client ID or Secret")
+        return access_token, token_type

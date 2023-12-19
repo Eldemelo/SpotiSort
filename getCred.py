@@ -49,8 +49,9 @@ class getCred():
             access_token = response_json['access_token']
             token_type = response_json['token_type']
             success = True
-            print("Successfully retrieved access token")
+            print("Success!")
         except:
+            return "Invalid Client ID or Secret"
             print("Invalid Client ID or Secret")
         return access_token, token_type
 
