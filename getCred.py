@@ -12,10 +12,10 @@ class getCred():
             authFile = open("login.txt", "r")
             currline = authFile.readline()
             currline = currline.strip()
-            client_id = currline
+            client_id = str(currline)
             currline = authFile.readline()
             currline = currline.strip()
-            client_secret = currline
+            client_secret = str(currline)
             authFile.close()
         except IOError:
             return -1, -1

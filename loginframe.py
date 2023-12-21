@@ -31,6 +31,7 @@ class LoginFrame(customtkinter.CTkFrame):
             access_token, token_type = getCred.getCred.retrieveToken(
                 self.idEntry.get(),
                 self.secretEntry.get())
+            print(access_token, token_type)
         except:
             print("Invalid Client ID or Secret")
         return access_token, token_type
