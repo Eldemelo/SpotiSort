@@ -1,5 +1,5 @@
 import customtkinter
-import loginframe, getCred
+import loginframe, getCred, homeframe
 
 class WelcomeFrame(customtkinter.CTkFrame):
     def __init__(self, master):
@@ -25,3 +25,6 @@ class WelcomeFrame(customtkinter.CTkFrame):
             self.openLoginFrame()
         else:
             access_token, token_type = getCred.getCred.retrieveToken(client_id, client_secret)
+            mainframe = homeframe.homeFrame
+            self.grid_forget()
+            mainframe(self.master, access_token, token_type)

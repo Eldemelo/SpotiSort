@@ -1,5 +1,5 @@
 import customtkinter
-import getCred
+import getCred, homeframe
 
 class LoginFrame(customtkinter.CTkFrame):
     def __init__(self, master):
@@ -32,6 +32,7 @@ class LoginFrame(customtkinter.CTkFrame):
                 self.idEntry.get(),
                 self.secretEntry.get())
             print(access_token, token_type)
+
         except:
             print("Invalid Client ID or Secret")
-        return access_token, token_type
+        return
