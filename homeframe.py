@@ -1,5 +1,5 @@
 import customtkinter
-import analyzePlaylist
+import analyzePlaylist, similarSongs
 
 class homeFrame(customtkinter.CTkFrame):
     def __init__(self, master, login_token, token_type):
@@ -24,13 +24,18 @@ class homeFrame(customtkinter.CTkFrame):
         self.showMainFrame()
 
         # Navigation buttons
-        mainFrame.analyzePlaylistNavButton = customtkinter.CTkButton(navFrame, text="Analyze Playlist", command=self.analyzePlaylistNav)
+        mainFrame.analyzePlaylistNavButton = customtkinter.CTkButton(navFrame, text="Analyze Playlist", command=self.showAnalyzePlaylistFrame)
         mainFrame.analyzePlaylistNavButton.grid(row=2, column=0, padx=10, pady=10)
-        self.similarSongNavButton = customtkinter.CTkButton(navFrame, text="Similar Songs")
+        self.similarSongNavButton = customtkinter.CTkButton(navFrame, text="Similar Songs", command=self.showSimilarSongsFrame)
         self.similarSongNavButton.grid(row=3, column=0, padx=10, pady=10)
 
         return
     
+    def forgetFrames(self):
+        mainFrame.grid_forget()
+        analyzePlaylist.analyzePlaylist.hideAnalyzePlaylist()
+        similarSongs.similarSongs.hideSimilarSongsFrame()
+
     def showMainFrame(self):
         global mainFrame
         mainFrame = customtkinter.CTkFrame(self)
@@ -41,10 +46,11 @@ class homeFrame(customtkinter.CTkFrame):
     def showAnalyzePlaylistFrame(self):
         global analyzePlaylistFrame
         analyzePlaylistFrame = analyzePlaylist
-        mainFrame.grid_forget()
-        analyzePlaylistFrame.analyzePlaylist(self.master)
-        
+        self.forgetFrames()
+        analyzePlaylistFrame.analyzePlaylist(self)
 
-    def analyzePlaylistNav(self):
-        self.showAnalyzePlaylistFrame()
-        return
+    def showSimilarSongsFrame(self):
+        global similarSongsFrame
+        similarSongsFrame = similarSongs
+        self.forgetFrames()
+        similarSongsFrame.similarSongs(self)
