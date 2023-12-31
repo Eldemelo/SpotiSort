@@ -1,5 +1,4 @@
 import customtkinter
-import homeframe
 
 class analyzePlaylist(customtkinter.CTkFrame):
     def __init__(self, master):
