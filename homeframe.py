@@ -2,8 +2,10 @@ import customtkinter
 import analyzePlaylist, similarSongs
 
 class homeFrame(customtkinter.CTkFrame):
+    login_token, token_type = "",""
     def __init__(self, master, login_token, token_type):
-        global mainFrame
+        self.login_token = login_token
+        self.token_type = token_type
         super().__init__(master)
         print(login_token, token_type)
 
@@ -21,37 +23,31 @@ class homeFrame(customtkinter.CTkFrame):
         self.navHeader.grid(padx=20, pady=10)
 
         # Create grid for the main area
-        self.showMainFrame()
         self.instantiateFrames()
 
         # Navigation buttons
-        mainFrame.analyzePlaylistNavButton = customtkinter.CTkButton(navFrame, text="Analyze Playlist", command=self.showAnalyzePlaylistFrame)
-        mainFrame.analyzePlaylistNavButton.grid(row=2, column=0, padx=10, pady=10)
+        self.analyzePlaylistNavButton = customtkinter.CTkButton(navFrame, text="Analyze Playlist", command=self.showAnalyzePlaylistFrame)
+        self.analyzePlaylistNavButton.grid(row=2, column=0, padx=10, pady=10)
         self.similarSongNavButton = customtkinter.CTkButton(navFrame, text="Similar Songs", command=self.showSimilarSongsFrame)
         self.similarSongNavButton.grid(row=3, column=0, padx=10, pady=10)
         return
     
+    # Function to hide all frames
+    def hideFrames(self):
+        analyzePlaylistFrame.grid_forget()
+        showSimilarSongsFrame.grid_forget()
+
+    # Function to instantiate all frames for use
     def instantiateFrames(self):
-        global analyzePlaylistFrame, similarSongsFrame
-        analyzePlaylistFrame = analyzePlaylist.analyzePlaylist(self)
-        similarSongsFrame = similarSongs.similarSongs(self)
+        global analyzePlaylistFrame, showSimilarSongsFrame
+        analyzePlaylistFrame = analyzePlaylist.analyzePlaylist(self, self.login_token, self.token_type)
+        showSimilarSongsFrame = similarSongs.similarSongs(self)
 
-    def forgetFrames(self):
-        mainFrame.grid_forget()
-        analyzePlaylistFrame.hideAnalyzePlaylist()
-        similarSongsFrame.hideSimilarSongsFrame()
-
-    def showMainFrame(self):
-        global mainFrame
-        mainFrame = customtkinter.CTkFrame(self)
-        mainFrame.grid(row=0, column=1, columnspan=6, padx=10, pady=10, sticky="NSEW")
-        self.mainHeader = customtkinter.CTkLabel(mainFrame, text="Main")
-        self.mainHeader.pack(fill='x', padx=10, pady=10)
-
+    # Functions to show different frames
     def showAnalyzePlaylistFrame(self):
-        self.forgetFrames()
-        analyzePlaylist.analyzePlaylist(self)
-
+        self.hideFrames()
+        analyzePlaylistFrame.grid(row=0, column=1, columnspan=6, padx=10, pady=10, sticky='NSWE')
+        
     def showSimilarSongsFrame(self):
-        self.forgetFrames()
-        similarSongs.similarSongs(self)
+        self.hideFrames()
+        showSimilarSongsFrame.grid(row=0, column=1, columnspan=6, padx=10, pady=10, sticky='NSWE')

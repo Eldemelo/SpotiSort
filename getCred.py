@@ -52,7 +52,6 @@ class getCred():
             print("Success!")
         except:
             return "Invalid Client ID or Secret"
-            print("Invalid Client ID or Secret")
         return access_token, token_type
 
     # Function to get user id and token either from a file saved from a previous login, or from user input
